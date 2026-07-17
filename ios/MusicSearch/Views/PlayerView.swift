@@ -107,7 +107,7 @@ struct PlayerView: View {
                 }
                 .padding(.vertical, 40)
             }
-            .onChange(of: player.progress) { _, _ in
+            .onChange(of: player.progress) { _ in
                 if let idx = currentLyricIndex() {
                     withAnimation(.easeInOut) { proxy.scrollTo(idx, anchor: .center) }
                 }
@@ -249,7 +249,7 @@ struct PlayerView: View {
                 .presentationDetents([.medium])
             }
         }
-        .onChange(of: playerVM.musicDownloadUrl) { _, url in
+        .onChange(of: playerVM.musicDownloadUrl) { url in
             guard let url, let m = player.currentMusic else { return }
             let prefs = PreferencesManager.shared
             var dir = prefs.getString(.downloadPath, default: "")

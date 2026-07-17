@@ -18,7 +18,7 @@ struct SettingsView: View {
 
                 Section("蜂窝网络") {
                     Toggle("自动降低音质", isOn: $cellularAutoLower)
-                        .onChange(of: cellularAutoLower) { _, v in prefs.setBool(v, for: .cellularAutoLower) }
+                        .onChange(of: cellularAutoLower) { v in prefs.setBool(v, for: .cellularAutoLower) }
 
                     if cellularAutoLower {
                         qualityPicker(selection: $cellularQuality, key: .cellularPlayQuality)
@@ -38,7 +38,7 @@ struct SettingsView: View {
                         Text("5 次").tag(5)
                         Text("10 次").tag(10)
                     }
-                    .onChange(of: lyricRetry) { _, v in prefs.setInt(v, for: .lyricRetryCount) }
+                    .onChange(of: lyricRetry) { v in prefs.setInt(v, for: .lyricRetryCount) }
                 }
 
                 Section("关于") {
@@ -79,7 +79,7 @@ struct SettingsView: View {
             Text("标准 MP3").tag("standard")
             Text("流畅 AAC").tag("fluent")
         }
-        .onChange(of: selection.wrappedValue) { _, v in prefs.setString(v, for: key) }
+        .onChange(of: selection.wrappedValue) { v in prefs.setString(v, for: key) }
         .pickerStyle(.segmented)
     }
 }

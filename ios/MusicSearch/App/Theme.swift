@@ -24,14 +24,20 @@ struct GlassBackground: ViewModifier {
 
     func body(content: Content) -> some View {
         if #available(iOS 26.0, *) {
-            content
-                .background(.glassEffect)
-                .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+            glassContent(content)
         } else {
             content
                 .background(.ultraThinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
         }
+    }
+
+    @ViewBuilder
+    @available(iOS 26.0, *)
+    private func glassContent(_ content: Content) -> some View {
+        content
+            .background(.glassEffect)
+            .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
     }
 }
 

@@ -95,8 +95,11 @@ enum EncryptMusicToken {
     private static func generateSubkeys(_ j2: Int64, _ jArr: inout [Int64], _ i2: Int) {
         var a2 = permute(pc1, 56, j2)
         for i3 in 0..<16 {
-            let lm = Int64(shifts[i3])
-            a2 = ((a2 & ~m[lm]) >> lm) | ((m[lm] & a2) << (28 - shifts[i3]))
+            let shift = Int64(shifts[i3])
+            let maskLow = m[shift]
+            let leftPart = (a2 & ~maskLow) >> shift
+            let rightPart = (maskLow & a2) << (28 - shifts[i3])
+            a2 = leftPart | rightPart
             jArr[i3] = permute(pc2, 64, a2)
         }
         if i2 == 1 {

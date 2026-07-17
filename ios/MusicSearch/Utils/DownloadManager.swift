@@ -33,7 +33,7 @@ final class DownloadManager: ObservableObject {
     @Published private(set) var tasks: [DownloadTask] = []
 
     private var session: URLSession!
-    private var taskMap: [Int: URLSessionDownloadTask] = [:]
+    fileprivate var taskMap: [Int: URLSessionDownloadTask] = [:]
     private var delegates: [Int: DownloadDelegate] = [:]
     private var nextId = 1
 

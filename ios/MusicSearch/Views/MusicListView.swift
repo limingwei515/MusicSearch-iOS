@@ -69,13 +69,13 @@ struct MusicListView: View {
         }
         .navigationTitle(title.isEmpty ? "歌曲列表" : title)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
+        .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
                 Button { showSearch = true } label: {
                     Image(systemName: "magnifyingglass")
                 }
             }
-        }
+        })
         .refreshable { viewModel.refresh() }
         .onAppear {
             viewModel.configure(type: type, id: id, name: title.isEmpty ? id : title)
@@ -96,7 +96,7 @@ struct MusicListView: View {
                 .presentationDetents([.medium])
             }
         }
-        .onChange(of: viewModel.musicDownloadUrl) { _, newUrl in
+        .onChange(of: viewModel.musicDownloadUrl) { newUrl in
             guard let url = newUrl, let m = selectedMusic else { return }
             startDownload(url: url, music: m, bitrate: "")
         }
