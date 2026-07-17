@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 底部bottomSheet -->
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="80dp" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:behavior_peekHeight="78dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:strokeWidth="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorSurfaceVariant"
+            android:clickable="true"
+            android:focusable="true">
+            <!-- 打开部分 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/sheet_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image_back"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="-40dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toTopOf="@id/bottom_layout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/image_card"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    app:cardBackgroundColor="?android:attr/colorBackground"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toTopOf="@id/toggle"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="?android:attr/colorBackground"
+                    app:strokeWidth="4dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.dirror.lyricviewx.LyricViewX
+                    android:id="@+id/sheet_viewpager"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:overScrollMode="never"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/toggle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/toggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:spacing="0dp"
+                    app:checkedButton="@id/b1"
+                    app:layout_constraintBottom_toTopOf="@id/bottom_layout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/b1"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:minWidth="0dp"
+                        android:minHeight="28dp"
+                        android:paddingLeft="12dp"
+                        android:paddingTop="6dp"
+                        android:paddingRight="12dp"
+                        android:paddingBottom="6dp"
+                        android:text="图片"
+                        android:textSize="12sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/b2"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:minWidth="0dp"
+                        android:minHeight="28dp"
+                        android:paddingLeft="12dp"
+                        android:paddingTop="6dp"
+                        android:paddingRight="12dp"
+                        android:paddingBottom="6dp"
+                        android:text="歌词"
+                        android:textSize="12sp" />
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/bottom_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="28dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:strokeWidth="0dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="?attr/colorSurfaceVariant">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/sheet_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:ellipsize="middle"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="@string/app_name"
+                            android:textColor="?attr/colorOnBackground"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toTopOf="@id/sheet_subname"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="spread" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/sheet_subname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:alpha="0.6"
+                            android:gravity="center"
+                            android:text="@string/app_name"
+                            android:textColor="?attr/colorOnBackground"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toTopOf="@id/seekbar"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/sheet_name" />
+
+                        <com.google.android.material.slider.Slider
+                            android:id="@+id/seekbar"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="12dp"
+                            android:paddingStart="0dp"
+                            android:paddingEnd="0dp"
+                            app:layout_constraintBottom_toTopOf="@id/play_fab"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/sheet_subname"
+                            app:thumbHeight="12dp"
+                            app:thumbRadius="4dp"
+                            app:trackColorInactive="?attr/colorSurface"
+                            app:trackHeight="8dp"
+                            app:trackInsideCornerSize="2dp"
+                            app:trackStopIndicatorSize="2dp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@id/time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="00:00"
+                            android:textColor="?attr/colorOnBackground"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/seekbar" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/max"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            android:text="00:00"
+                            android:textColor="?attr/colorOnBackground"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/seekbar" />
+
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/switch_button"
+                            style="@style/Widget.MaterialComponents.TimePicker.ImageButton"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_marginEnd="20dp"
+                            android:insetLeft="0dp"
+                            android:insetTop="0dp"
+                            android:insetRight="0dp"
+                            android:insetBottom="0dp"
+                            app:backgroundTint="@android:color/transparent"
+                            app:icon="@drawable/icon_download"
+                            app:iconSize="24dp"
+                            app:iconTint="?attr/colorOnBackground"
+                            app:layout_constraintBottom_toBottomOf="@id/play_fab"
+                            app:layout_constraintEnd_toStartOf="@id/prev_button"
+                            app:layout_constraintTop_toTopOf="@id/play_fab" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/prev_button"
+                            style="@style/Widget.MaterialComponents.TimePicker.ImageButton"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_marginEnd="20dp"
+                            android:insetLeft="0dp"
+                            android:insetTop="0dp"
+                            android:insetRight="0dp"
+                            android:insetBottom="0dp"
+                            app:backgroundTint="@android:color/transparent"
+                            app:icon="@drawable/icon_skip_previous"
+                            app:iconSize="24dp"
+                            app:iconTint="?attr/colorOnBackground"
+                            app:layout_constraintBottom_toBottomOf="@id/play_fab"
+                            app:layout_constraintEnd_toStartOf="@id/play_fab"
+                            app:layout_constraintTop_toTopOf="@id/play_fab" />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/play_fab"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginBottom="20dp"
+                            android:src="@drawable/icon_play_arrow"
+                            app:backgroundTint="?attr/colorPrimary"
+                            app:elevation="0dp"
+                            app:fabCustomSize="64dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/seekbar"
+                            app:maxImageSize="28dp"
+                            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
+                            app:tint="?android:attr/colorBackground"
+                            app:useCompatPadding="false" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/next_button"
+                            style="@style/Widget.MaterialComponents.TimePicker.ImageButton"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_marginStart="20dp"
+                            android:insetLeft="0dp"
+                            android:insetTop="0dp"
+                            android:insetRight="0dp"
+                            android:insetBottom="0dp"
+                            app:backgroundTint="@android:color/transparent"
+                            app:icon="@drawable/icon_skip_next"
+                            app:iconSize="24dp"
+                            app:iconTint="?attr/colorOnBackground"
+                            app:layout_constraintBottom_toBottomOf="@id/play_fab"
+                            app:layout_constraintStart_toEndOf="@id/play_fab"
+                            app:layout_constraintTop_toTopOf="@id/play_fab" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/play_status"
+                            style="@style/Widget.MaterialComponents.TimePicker.ImageButton"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:layout_marginStart="20dp"
+                            android:insetLeft="0dp"
+                            android:insetTop="0dp"
+                            android:insetRight="0dp"
+                            android:insetBottom="0dp"
+                            app:backgroundTint="@android:color/transparent"
+                            app:icon="@drawable/icon_shunxu"
+                            app:iconSize="22dp"
+                            app:iconTint="?attr/colorOnBackground"
+                            app:layout_constraintBottom_toBottomOf="@id/play_fab"
+                            app:layout_constraintStart_toEndOf="@id/next_button"
+                            app:layout_constraintTop_toTopOf="@id/play_fab" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- 外露部分,这里必须放下边防止盖住 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/sheet_layout"
+                android:layout_width="match_parent"
+                android:layout_height="78dp"
+                android:alpha="1.0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/sheet_icon_card"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="?attr/colorSurfaceVariant"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/sheet_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        app:srcCompat="@mipmap/ic_launcher" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/song_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="@string/app_name"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/sheet_list_button"
+                    app:layout_constraintStart_toEndOf="@id/sheet_icon_card"
+                    app:layout_constraintTop_toTopOf="@id/sheet_icon_card"
+                    app:layout_constraintWidth_default="spread" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/singer_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:alpha="0.6"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="选个歌曲播放吧"
+                    android:textColor="?attr/colorOnBackground"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/sheet_icon_card"
+                    app:layout_constraintEnd_toStartOf="@id/sheet_list_button"
+                    app:layout_constraintStart_toEndOf="@id/sheet_icon_card" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/sheet_list_button"
+                    style="@style/Widget.MaterialComponents.TimePicker.ImageButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:backgroundTint="@android:color/transparent"
+                    app:icon="@drawable/icon_download"
+                    app:iconSize="24dp"
+                    app:iconTint="?attr/colorOnBackground"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/sheet_play"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/sheet_play"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@id/sheet_icon_card"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/sheet_icon_card">
+
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@id/progress_circular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:max="100"
+                        android:progress="0"
+                        app:indicatorInset="0dp"
+                        app:indicatorSize="40dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:trackColor="@color/main_background_color"
+                        app:trackCornerRadius="4dp"
+                        app:trackThickness="4dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/sheet_play_button"
+                        style="@style/Widget.MaterialComponents.TimePicker.ImageButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="0dp"
+                        app:backgroundTint="@android:color/transparent"
+                        app:icon="@drawable/icon_play_arrow"
+                        app:iconSize="24dp"
+                        app:iconTint="?attr/colorOnBackground"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

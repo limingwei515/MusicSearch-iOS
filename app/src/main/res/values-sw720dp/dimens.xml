@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 大平板适配尺寸（10寸及以上） -->
+    
+    <!-- 音乐卡片尺寸 -->
+    <dimen name="music_card_margin">20dp</dimen>
+    <dimen name="music_card_padding">16dp</dimen>
+    <dimen name="music_card_corner_radius">20dp</dimen>
+    
+    <!-- 专辑图片尺寸 -->
+    <dimen name="album_image_size">280dp</dimen>
+    <dimen name="album_card_width">0dp</dimen>
+    
+    <!-- 间距 -->
+    <dimen name="spacing_small">12dp</dimen>
+    <dimen name="spacing_medium">20dp</dimen>
+    <dimen name="spacing_large">32dp</dimen>
+    <dimen name="spacing_xlarge">48dp</dimen>
+    
+    <!-- 文字大小 -->
+    <dimen name="text_size_title">28sp</dimen>
+    <dimen name="text_size_subtitle">20sp</dimen>
+    <dimen name="text_size_body">18sp</dimen>
+    
+    <!-- 按钮尺寸 -->
+    <dimen name="button_height">64dp</dimen>
+    <dimen name="icon_size_large">56dp</dimen>
+    <dimen name="icon_size_medium">40dp</dimen>
+    
+    <!-- 底部播放器 -->
+    <dimen name="mini_player_height">100dp</dimen>
+    <dimen name="mini_player_image_size">80dp</dimen>
+    
+    <!-- 列表项 -->
+    <dimen name="list_item_height">96dp</dimen>
+    <dimen name="list_item_image_size">72dp</dimen>
+    
+    <!-- 工具栏 -->
+    <dimen name="toolbar_height">72dp</dimen>
+    
+    <!-- Banner轮播 -->
+    <dimen name="banner_height">360dp</dimen>
+    
+    <!-- RecyclerView -->
+    <dimen name="grid_span_count">3</dimen>
+</resources>

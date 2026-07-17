@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/like"
+        android:icon="@drawable/icon_like"
+        android:title="我的收藏" />
+    <item
+        android:id="@+id/dow"
+        android:icon="@drawable/icon_download"
+        android:title="下载管理" />
+    <item
+        android:id="@+id/gedan"
+        android:icon="@drawable/icon_gedan"
+        android:title="绑定歌单" />
+    <item
+        android:id="@+id/feedback"
+        android:icon="@drawable/icon_fankui"
+        android:title="问题反馈" />
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/icon_menu"
+        android:title="设置" />
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/update_log"
+            android:title="更新日志" />
+
+        <item
+            android:id="@+id/about"
+            android:title="关于我们" />
+    </group>
+</menu>

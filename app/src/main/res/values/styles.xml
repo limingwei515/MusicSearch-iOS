@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SubTitleAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/main_subtitle_color</item>
+    </style>
+
+    <style name="TitleAppearance">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/main_title_color</item>
+    </style>
+
+    <!--  ****************************************************************  -->
+
+    <!-- 自定义MaterialDialogTheme -->
+    <style name="CustomAlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/MaterialAlertDialogStyle</item>
+        <item name="android:windowAnimationStyle">@style/MyDialogScale</item>
+        <!-- 选项选中的颜色 -->
+        <item name="colorAccent">?attr/colorPrimary</item>
+    </style>
+
+    <!-- 弹窗的圆角 -->
+    <style name="MaterialAlertDialogStyle">
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <!--  ****************************************************************  -->
+
+
+    <!-- 设置加载弹窗的动画和背景透明 -->
+    <style name="LoadingDialog" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowAnimationStyle">@style/MyDialogScale</item>
+    </style>
+
+    <!-- 弹窗的加载动画 -->
+    <style name="MyDialogScale">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit_anim</item>
+    </style>
+
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+    </style>
+</resources>
