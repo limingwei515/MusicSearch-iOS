@@ -23,20 +23,14 @@ struct GlassBackground: ViewModifier {
     var cornerRadius: CGFloat = 16
 
     func body(content: Content) -> some View {
-        if #available(iOS 26.0, *) {
-            glassContent(content)
-        } else {
-            content
-                .background(.ultraThinMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-        }
-    }
-
-    @ViewBuilder
-    @available(iOS 26.0, *)
-    private func glassContent(_ content: Content) -> some View {
+        // 注：.glassEffect 是 iOS 26 新 API
+        // 当前 Xcode 16.4 的 iOS 18.5 SDK 不含此符号，直接用 .ultraThinMaterial
+        // 未来用 Xcode 26+ 编译时，可改为：
+        // if #available(iOS 26.0, *) {
+        //     content.background(.glassEffect)...
+        // }
         content
-            .background(.glassEffect)
+            .background(.ultraThinMaterial)
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
     }
 }
