@@ -26,7 +26,7 @@ jobs:
           cd ios
           xcodebuild -project MusicSearch.xcodeproj -list
 
-      - name: Build (iOS Simulator)
+      - name: Build .app (iOS Simulator)
         run: |
           cd ios
           xcodebuild \
@@ -36,12 +36,87 @@ jobs:
             -destination 'generic/platform=iOS Simulator' \
             -configuration Debug \
             CODE_SIGNING_ALLOWED=NO \
-            build 2>&1 | tee build.log
+            build \
+            -derivedDataPath build/DerivedData 2>&1 | tee build_sim.log
 
-      - name: Upload build log on failure
+      - name: Build archive (iOS Device, unsigned)
+        run: |
+          cd ios
+          mkdir -p build/archive
+          xcodebuild \
+            -project MusicSearch.xcodeproj \
+            -scheme MusicSearch \
+            -sdk iphoneos \
+            -configuration Release \
+            -archivePath build/archive/MusicSearch.xcarchive \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            AD_HOC_CODE_SIGNING_ALLOWED=NO \
+            archive 2>&1 | tee build_archive.log
+
+      - name: Export unsigned .ipa
+        run: |
+          cd ios
+          mkdir -p build/export
+          cat > build/ExportOptions.plist << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>method</key>
+              <string>debugging</string>
+              <key>signingStyle</key>
+              <string>ad-hoc</string>
+              <key>stripSwiftSymbols</key>
+              <true/>
+              <key>teamID</key>
+              <string></string>
+              <key>thinning</key>
+              <string></string>
+          </dict>
+          </plist>
+          EOF
+          xcodebuild \
+            -exportArchive \
+            -archivePath build/archive/MusicSearch.xcarchive \
+            -exportPath build/export \
+            -exportOptionsPlist build/ExportOptions.plist \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO 2>&1 | tee build_export.log || true
+
+      - name: Create unsigned .ipa manually (if export failed)
+        run: |
+          cd ios
+          if [ ! -f build/export/MusicSearch.ipa ]; then
+            echo "Standard export failed, creating .ipa manually from .app"
+            APP_PATH=$(find build/archive/MusicSearch.xcarchive/Products/Applications -name "MusicSearch.app" -type d 2>/dev/null | head -1)
+            if [ -n "$APP_PATH" ]; then
+              mkdir -p build/Payload
+              cp -r "$APP_PATH" build/Payload/
+              cd build
+              zip -r -X MusicSearch.ipa Payload
+              cd ..
+              cp build/MusicSearch.ipa build/export/MusicSearch.ipa
+              echo "Created unsigned .ipa at build/export/MusicSearch.ipa"
+              ls -la build/export/
+            fi
+          fi
+
+      - name: Upload .ipa artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MusicSearch-ipa
+          path: ios/build/export/MusicSearch.ipa
+          retention-days: 30
+
+      - name: Upload build logs on failure
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: build-log
-          path: ios/build.log
+          name: build-logs
+          path: |
+            ios/build_sim.log
+            ios/build_archive.log
+            ios/build_export.log
           retention-days: 7
