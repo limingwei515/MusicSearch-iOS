@@ -130,7 +130,8 @@ enum EncryptMusicToken {
             var u: UInt32 = 0
             for w in stride(from: 7, through: 0, by: -1) {
                 u <<= 4
-                u |= UInt32(sboxes[w][Int(t[w])])
+                let idx = Int(t[w]) & 0x3F
+                u |= UInt32(sboxes[w][idx])
             }
             r = Int64(u)
             r = permute(e_P, 32, r)

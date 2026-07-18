@@ -35,7 +35,9 @@ enum HttpRequest {
         var bodyData: Data? = nil
 
         if method == .GET && !params.isEmpty {
-            var comp = URLComponents(string: url)!
+            guard var comp = URLComponents(string: url) else {
+                throw URLError(.badURL)
+            }
             comp.queryItems = params.map { URLQueryItem(name: $0.key, value: $0.value) }
             finalURL = comp.url?.absoluteString ?? url
         } else if method != .GET {
