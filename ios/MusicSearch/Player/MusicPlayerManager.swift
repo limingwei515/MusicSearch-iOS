@@ -6,6 +6,7 @@ import UIKit
 
 /// 音乐播放管理器（对应 Android MusicLibraryService）
 /// 基于 AVPlayer，支持后台播放、锁屏控制、NowPlaying 信息
+@MainActor
 final class MusicPlayerManager: NSObject, ObservableObject {
 
     static let shared = MusicPlayerManager()
@@ -30,6 +31,7 @@ final class MusicPlayerManager: NSObject, ObservableObject {
     private var rateObserver: NSKeyValueObservation?
     private var itemEndObserver: NSObjectProtocol?
     private var audioSessionConfigured = false
+    private var remoteCommandsSetup = false
 
     // MARK: - 回调
     var onPlaybackCompleted: (() -> Void)?
@@ -118,10 +120,12 @@ final class MusicPlayerManager: NSObject, ObservableObject {
             self.updateNowPlayingProgress()
         }
 
-        p.play()
         isPlaying = true
         hasPlayedOnce = true
-        setupRemoteCommands()
+        if !remoteCommandsSetup {
+            setupRemoteCommands()
+            remoteCommandsSetup = true
+        }
     }
 
     func pause() {

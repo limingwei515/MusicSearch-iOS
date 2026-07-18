@@ -5,8 +5,8 @@ import SwiftUI
 struct MusicListView: View {
     let route: String
     @StateObject private var viewModel = MusicViewModel()
-    @StateObject private var player = MusicPlayerManager.shared
-    @StateObject private var playerVM = MusicPlayerViewModel()
+    @EnvironmentObject private var player: MusicPlayerManager
+    @EnvironmentObject private var playerVM: MusicPlayerViewModel
     @EnvironmentObject var favoriteStore: FavoriteStore
     @State private var showSearch = false
     @State private var showQuality = false

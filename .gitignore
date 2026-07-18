@@ -33,6 +33,12 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 
+# iOS 构建产物
+ios/AltServer.zip
+ios/AltServer.app
+ios/ipa_build/
+ios/build/
+
 # Android (保留原有项目，忽略编译产物)
 app/build/
 .gradle/

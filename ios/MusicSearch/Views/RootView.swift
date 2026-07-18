@@ -28,7 +28,7 @@ struct RootView: View {
 /// 主 Tab 视图（首页 / 收藏 / 下载 / 设置），带液态玻璃 TabBar
 struct MainTabView: View {
     @State private var selectedTab = 0
-    @StateObject private var player = MusicPlayerManager.shared
+    @EnvironmentObject private var player: MusicPlayerManager
     @State private var showFullPlayer = false
 
     var body: some View {
@@ -71,8 +71,8 @@ struct MainTabView: View {
 /// 收藏列表视图
 struct FavoriteListView: View {
     @EnvironmentObject var favoriteStore: FavoriteStore
-    @StateObject private var playerVM = MusicPlayerViewModel()
-    @StateObject private var player = MusicPlayerManager.shared
+    @EnvironmentObject private var playerVM: MusicPlayerViewModel
+    @EnvironmentObject private var player: MusicPlayerManager
 
     var body: some View {
         NavigationStack {

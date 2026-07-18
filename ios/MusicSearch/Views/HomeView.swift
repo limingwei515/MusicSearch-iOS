@@ -3,8 +3,8 @@ import SwiftUI
 /// 首页（对应 Android HomeFragment）
 struct HomeView: View {
     @EnvironmentObject var homeVM: HomeViewModel
-    @StateObject private var player = MusicPlayerManager.shared
-    @StateObject private var playerVM = MusicPlayerViewModel()
+    @EnvironmentObject private var player: MusicPlayerManager
+    @EnvironmentObject private var playerVM: MusicPlayerViewModel
     @State private var showSearch = false
     @State private var searchText = ""
     @State private var navigationPath = NavigationPath()
