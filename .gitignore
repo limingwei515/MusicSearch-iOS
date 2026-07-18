@@ -45,3 +45,4 @@ app/build/
 local.properties
 *.apk
 *.aab
+MusicSearch-*.ips
